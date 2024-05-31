@@ -1,38 +1,79 @@
 version: '3.8'
-name: template01
+name: martapi
 services:
   api:
     build:
-      context: ./todo
+      context: ./Inventory
       dockerfile: Dockerfile.dev
     volumes:
-      - ./todo:/code  # Sync local development directory with the container
+      - ./Inventory:/code  # Sync local development directory with the container
     depends_on:
         - postgres_db
     ports:
-      - "8000:8000"  # Expose container port 8000 to host port 8000  
-  api2:
-    build:
-      context: ./microservice_02
-      dockerfile: Dockerfile.dev
-    volumes:
-      - ./microservice_02:/code  # Sync local development directory with the container
-    depends_on:
-        - postgres_db
-    ports:
-      - "8002:8000"  # Expose container port 8000 to host port 8000  
+      - "8010:8010"    
+  # api2:
+  #   build:
+  #     context: ./Notification
+  #     dockerfile: Dockerfile.dev
+  #   volumes:
+  #     - ./Notification:/code  # Sync local development directory with the container
+  #   depends_on:
+  #       - postgres_db
+  #   ports:
+  #     - "8012:8012" 
+  # api3:
+  #   build:
+  #     context: ./Order
+  #     dockerfile: Dockerfile.dev
+  #   volumes:
+  #     - ./Order:/code  # Sync local development directory with the container
+  #   depends_on:
+  #       - postgres_db
+  #   ports:
+  #     - "8014:8014"    
+  # api4:
+  #   build:
+  #     context: ./Product
+  #     dockerfile: Dockerfile.dev
+  #   volumes:
+  #     - ./Product:/code  # Sync local development directory with the container
+  #   depends_on:
+  #       - postgres_db
+  #   ports:
+  #     - "8016:8016"
+  # api5:
+  #   build:
+  #     context: ./Pyment
+  #     dockerfile: Dockerfile.dev
+  #   volumes:
+  #     - ./Pyment:/code  # Sync local development directory with the container
+  #   depends_on:
+  #       - postgres_db
+  #   ports:
+  #     - "8018:8018"    
+  # api6:
+  #   build:
+  #     context: ./User
+  #     dockerfile: Dockerfile.dev
+  #   volumes:
+  #     - ./User:/code  # Sync local development directory with the container
+  #   depends_on:
+  #       - postgres_db
+  #   ports:
+  #     - "8020:8020"  
   postgres_db:
     image: postgres:latest  # Use the official PostgreSQL image
     restart: always
     container_name: PostgresCont
     environment:
-        - POSTGRES_USER=ziakhan
+        - POSTGRES_USER=ajmal
         - POSTGRES_PASSWORD=my_password
         - POSTGRES_DB=mydatabase
     ports:
         - '5433:5432'
     volumes:
         - postgres_db:/var/lib/postgresql/data
+    
   broker:
     image: apache/kafka:3.7.0
     hostname: broker
