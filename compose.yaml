@@ -9,58 +9,64 @@ services:
       - ./Inventory:/code  # Sync local development directory with the container
     depends_on:
         - postgres_db
+        - broker
     ports:
       - "8010:8010"    
-  # api2:
-  #   build:
-  #     context: ./Notification
-  #     dockerfile: Dockerfile.dev
-  #   volumes:
-  #     - ./Notification:/code  # Sync local development directory with the container
-  #   depends_on:
-  #       - postgres_db
-  #   ports:
-  #     - "8012:8012" 
-  # api3:
-  #   build:
-  #     context: ./Order
-  #     dockerfile: Dockerfile.dev
-  #   volumes:
-  #     - ./Order:/code  # Sync local development directory with the container
-  #   depends_on:
-  #       - postgres_db
-  #   ports:
-  #     - "8014:8014"    
-  # api4:
-  #   build:
-  #     context: ./Product
-  #     dockerfile: Dockerfile.dev
-  #   volumes:
-  #     - ./Product:/code  # Sync local development directory with the container
-  #   depends_on:
-  #       - postgres_db
-  #   ports:
-  #     - "8016:8016"
-  # api5:
-  #   build:
-  #     context: ./Pyment
-  #     dockerfile: Dockerfile.dev
-  #   volumes:
-  #     - ./Pyment:/code  # Sync local development directory with the container
-  #   depends_on:
-  #       - postgres_db
-  #   ports:
-  #     - "8018:8018"    
-  # api6:
-  #   build:
-  #     context: ./User
-  #     dockerfile: Dockerfile.dev
-  #   volumes:
-  #     - ./User:/code  # Sync local development directory with the container
-  #   depends_on:
-  #       - postgres_db
-  #   ports:
-  #     - "8020:8020"  
+  api2:
+    build:
+      context: ./Notification
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./Notification:/code  # Sync local development directory with the container
+    depends_on:
+        - postgres_db
+        - broker
+    ports:
+      - "8012:8012" 
+  api3:
+    build:
+      context: ./Order
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./Order:/code  # Sync local development directory with the container
+    depends_on:
+        - postgres_db
+        - broker
+    ports:
+      - "8014:8014"    
+  api4:
+    build:
+      context: ./Product
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./Product:/code  # Sync local development directory with the container
+    depends_on:
+        - postgres_db
+        - broker
+    ports:
+      - "8016:8016"
+  api5:
+    build:
+      context: ./Pyment
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./Pyment:/code  # Sync local development directory with the container
+    depends_on:
+        - postgres_db
+        - broker
+    ports:
+      - "8018:8018"    
+  api6:
+    build:
+      context: ./User
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./User:/code  # Sync local development directory with the container
+    depends_on:
+        - postgres_db
+        - broker
+    ports:
+      - "8020:8020"  
   postgres_db:
     image: postgres:latest  # Use the official PostgreSQL image
     restart: always
