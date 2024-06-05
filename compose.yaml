@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 name: martapi
 services:
   api:
@@ -74,7 +74,7 @@ services:
     environment:
         - POSTGRES_USER=ajmal
         - POSTGRES_PASSWORD=my_password
-        - POSTGRES_DB=mydatabase
+        - POSTGRES_DB=orderservice
     ports:
         - '5433:5432'
     volumes:

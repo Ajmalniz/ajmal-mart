@@ -104,9 +104,9 @@ async def create_todo(todo: Todo, session: Annotated[Session, Depends(get_sessio
         print("todoJSON:", todo_json)
         # Produce message
         await producer.send_and_wait("todos", todo_json)
-        # session.add(todo)
-        # session.commit()
-        # session.refresh(todo)
+        session.add(todo)
+        session.commit()
+        session.refresh(todo)
         return todo
 
 
